@@ -215,9 +215,7 @@ export class GeoPoint {
    * @param point {GeoPoint}
    * @returns {number} distance in meters
    */
-  calculateDistance(point: GeoPoint): number {
-    return GeoPoint.calculateDistance(this, point);
-  }
+     calculateDistance(point: GeoPoint): number {}
 
   /**
    *
