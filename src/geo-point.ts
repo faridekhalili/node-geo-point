@@ -66,7 +66,7 @@ export class GeoPoint {
     }
 
     if (point.type !== 'Point') {
-      throw new TypeError('The value of type should be \'Point\'');
+         throw new TypeError("");
     }
 
     if (!Array.isArray(point.coordinates) || point.coordinates.length !== 2) {
