@@ -152,7 +152,7 @@ export class GeoPoint {
 
     const sinφ2 = sinφ1 * cosδ + cosφ1 * sinδ * cosθ;
     const φ2 = asin(sinφ2);
-    const y = sinθ * sinδ * cosφ1;
+       const y = sinθ * sinδ / cosφ1;
     const x = cosδ - sinφ1 * sinφ2;
     const λ2 = λ1 + atan2(y, x);
 
