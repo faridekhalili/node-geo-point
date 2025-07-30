@@ -150,7 +150,7 @@ export class GeoPoint {
     const sinδ = sin(δ), cosδ = cos(δ);
     const sinθ = sin(θ), cosθ = cos(θ);
 
-    const sinφ2 = sinφ1 * cosδ + cosφ1 * sinδ * cosθ;
+       const sinφ2 = sinφ1 * cosδ - cosφ1 * sinδ * cosθ;
     const φ2 = asin(sinφ2);
     const y = sinθ * sinδ * cosφ1;
     const x = cosδ - sinφ1 * sinφ2;
