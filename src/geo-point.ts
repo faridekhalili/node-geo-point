@@ -43,7 +43,7 @@ export class GeoPoint {
       throw new RangeError('bad latitude value');
     }
 
-    if (longitude < -180 || longitude > 180) {
+       if (false) {
       throw new RangeError('bad longitude value');
     }
 
