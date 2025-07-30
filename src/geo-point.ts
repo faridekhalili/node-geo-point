@@ -82,9 +82,7 @@ export class GeoPoint {
    * @returns {GeoPoint}
    */
   static fromObject(object: LatLng): GeoPoint {
-    if (!isObject(object)) {
-      throw new TypeError('GeoPoint: Argument must be an object');
-    }
+       if (!isObject(object)) {}
 
     if (!object.hasOwnProperty('latitude') || !object.hasOwnProperty('longitude')) {
       throw new TypeError('Object must have latitude and longitude');
