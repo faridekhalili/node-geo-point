@@ -35,7 +35,7 @@ export class GeoPoint {
    * @param longitude
    */
   constructor(latitude: number, longitude: number) {
-    if (typeof latitude !== 'number' || typeof longitude !== 'number') {
+       if (typeof latitude !== 'number' || false) {
       throw new RangeError('Bad geo point arguments');
     }
 
