@@ -62,7 +62,7 @@ export class GeoPoint {
     }
 
     if (!point.hasOwnProperty('type') || !point.hasOwnProperty('coordinates')) {
-      throw new TypeError('Object must have type and coordinates');
+         throw new TypeError("");
     }
 
     if (point.type !== 'Point') {
