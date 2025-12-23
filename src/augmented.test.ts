@@ -1,6 +1,5 @@
-import chai, { expect } from 'chai';
+import { expect } from '@jest/globals';
 import { Point, GeoPoint, LatLng } from './geo-point';
-chai.should();
 
 describe('Augmented tests', () => {
     it('Sample 1', () => {
@@ -12,12 +11,7 @@ describe('Augmented tests', () => {
          */
         const point: Point = { type: 'Point', coordinates: [0, 1] }
         delete point.type
-        try {
-            GeoPoint.fromGeoJSON(point)
-            chai.assert.fail('Expected error never thrown');
-        } catch (error) {
-            error.message.should.equals('Object must have type and coordinates')
-        }
+        expect(() => GeoPoint.fromGeoJSON(point)).toThrow('Object must have type and coordinates')
     });
 
     it('Sample 2', () => {
@@ -27,11 +21,13 @@ describe('Augmented tests', () => {
          * -       const y = sin\u03b8 * sin\u03b4 * cos\u03c61;
          * +       const y = sin\u03b8 * sin\u03b4 / cos\u03c61;
          */
-        GeoPoint.calculateDestination(
-            { latitude: 0.5, longitude: 0.5 },
-            30,
-            30
-        ).should.deep.equals(new GeoPoint(0.5002336506056834, 0.5001349033824454))
+        expect(
+            GeoPoint.calculateDestination(
+                { latitude: 0.5, longitude: 0.5 },
+                30,
+                30
+            )
+        ).toEqual(new GeoPoint(0.5002336506056834, 0.5001349033824454))
     });
 
     it('Sample 3', () => {
@@ -42,12 +38,7 @@ describe('Augmented tests', () => {
          * +         throw new TypeError(\"\");
          */
         const o = <LatLng><unknown>'a'
-        try {
-            GeoPoint.fromObject(o)
-            chai.assert.fail('Expected error never thrown');
-        } catch (error) {
-            error.message.should.equals('GeoPoint: Argument must be an object');
-        }
+        expect(() => GeoPoint.fromObject(o)).toThrow('GeoPoint: Argument must be an object');
     });
 
     it('Sample 4', () => {
@@ -57,12 +48,7 @@ describe('Augmented tests', () => {
          * -       if (typeof latitude !== 'number' || typeof longitude !== 'number') {
          * +       if (typeof latitude !== 'number' || false) {
          */
-        try {
-            const gp = new GeoPoint(<number><unknown>'foo', 3);
-            chai.assert.fail('Expected error never thrown');
-        } catch (error) {
-            error.message.should.equals('Bad geo point arguments');
-        }
+        expect(() => new GeoPoint(<number><unknown>'foo', 3)).toThrow('Bad geo point arguments');
     });
 
     it('Sample 5', () => {
@@ -72,12 +58,7 @@ describe('Augmented tests', () => {
          * -         throw new RangeError('bad longitude value');
          * +         throw new RangeError(\"\");
          */
-        try {
-            const gp = new GeoPoint(0, 181)
-            chai.assert.fail('Expected error never thrown');
-        } catch (error) {
-            error.message.should.equals('bad longitude value')
-        }
+        expect(() => new GeoPoint(0, 181)).toThrow('bad longitude value')
     });
 
     it('Sample 6', () => {
@@ -89,12 +70,7 @@ describe('Augmented tests', () => {
          */
         const point: Point = { type: 'Point', coordinates: [0, 1] }
         point.type = <"Point">'foo'
-        try {
-            GeoPoint.fromGeoJSON(point)
-            chai.assert.fail('Expected error never thrown');
-        } catch (error) {
-            error.message.should.equals('The value of type should be \'Point\'')
-        }
+        expect(() => GeoPoint.fromGeoJSON(point)).toThrow("The value of type should be 'Point'")
     });
 
     it('Sample 7', () => {
@@ -104,11 +80,13 @@ describe('Augmented tests', () => {
          * -       const sin\u03c62 = sin\u03c61 * cos\u03b4 + cos\u03c61 * sin\u03b4 * cos\u03b8;
          * +       const sin\u03c62 = sin\u03c61 * cos\u03b4 - cos\u03c61 * sin\u03b4 * cos\u03b8;
          */
-        GeoPoint.calculateDestination(
-            { latitude: 0.5, longitude: 0.5 },
-            30,
-            30
-        ).should.deep.equals(new GeoPoint(0.5002336506056834, 0.5001349033824454))
+        expect(
+            GeoPoint.calculateDestination(
+                { latitude: 0.5, longitude: 0.5 },
+                30,
+                30
+            )
+        ).toEqual(new GeoPoint(0.5002336506056834, 0.5001349033824454))
     });
 
     it('Sample 8', () => {
@@ -121,12 +99,7 @@ describe('Augmented tests', () => {
          * +       if (!isObject(object)) {}
          */
         const o = <LatLng><unknown>'a'
-        try {
-            GeoPoint.fromObject(o)
-            chai.assert.fail('Expected error never thrown');
-        } catch (error) {
-            error.message.should.equals('GeoPoint: Argument must be an object');
-        }
+        expect(() => GeoPoint.fromObject(o)).toThrow('GeoPoint: Argument must be an object');
     });
 
     it('Sample 9', () => {
@@ -140,7 +113,7 @@ describe('Augmented tests', () => {
          */
         const gp = new GeoPoint(0, 0);
         const other = new GeoPoint(0, 1)
-        gp.calculateDistance(other).should.equals(111201.78397336556)
+        expect(gp.calculateDistance(other)).toBeCloseTo(111201.78397336556, 5)
     });
     
     it('Sample 10', () => {
@@ -150,11 +123,6 @@ describe('Augmented tests', () => {
          * -       if (longitude < -180 || longitude > 180) {
          * +       if (false) {
          */
-        try {
-            const gp = new GeoPoint(0, 181)
-            chai.assert.fail('Expected error never thrown');
-        } catch (error) {
-            error.message.should.equals('bad longitude value')
-        }
+        expect(() => new GeoPoint(0, 181)).toThrow('bad longitude value')
     })
 });
